@@ -18,3 +18,10 @@ Scenario: Attempting to assign a student to an unavailable monitor
   When I attempt to assign the student "João" to the monitor "Maria"
   Then I see the error message "The monitor is not available"
   And I see the student "João" with the status "Unassigned" in the list
+
+Scenario: Try to allocate student without pending worksheets
+  Given the student "Carlos" has no pending worksheets
+  And I am at the "Student Allocation" page
+  When I try to allocate the student "Carlos" to teaching assistant "Maria"
+  Then I see the error message "Student has no pending worksheets to evaluate"
+  And I see the student "Carlos" with status "Unallocated"
