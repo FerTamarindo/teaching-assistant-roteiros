@@ -25,3 +25,11 @@ Scenario: Try to allocate student without pending worksheets
   When I try to allocate the student "Carlos" to teaching assistant "Maria"
   Then I see the error message "Student has no pending worksheets to evaluate"
   And I see the student "Carlos" with status "Unallocated"
+
+Scenario: Attempting to assign a student already assigned to another monitor
+  Given student "Bruno" is assigned to monitor "Lucas"
+  And monitor "Maria" has the status "Available"
+  And I am on the "Monitor Allocation" page
+  When I attempt to assign student "Bruno" to monitor "Maria"
+  Then I see the error message "The student already has an assigned monitor"
+  And I see monitor "Lucas" remain as the person responsible for student "Bruno" in the list
