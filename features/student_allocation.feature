@@ -25,3 +25,4 @@ Scenario: Try to allocate student without pending worksheets
   When I try to allocate the student "Carlos" to teaching assistant "Maria"
   Then I see the error message "Student has no pending worksheets to evaluate"
   And I see the student "Carlos" with status "Unallocated"
+  And I see teaching assistant "Maria" available for other allocations
