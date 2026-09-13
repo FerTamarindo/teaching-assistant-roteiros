@@ -3,7 +3,7 @@ Feature: Student allocation to teaching assistants
   I want to allocate students to responsible teaching assistants
   So that teaching assistants can monitor and grade their students' exercises
 
-Scenario: Successfully assign a student to a monitor (web)
+Scenario: Successfully assign a student to a monitor 
   Given student "Fernanda" has a worksheet pending review
   And monitor "Lucas" is registered with "Available" status
   And I am on the "Monitor Allocation" page
@@ -42,4 +42,11 @@ Scenario: Successfully list all monitors available
   When I request to view the available monitors
   Then I see the monitors "Lucas" and "Maria" in the list of available monitors
   And I do not see the monitor "Pedro" in the list of available monitors
+
+Scenario: Successfully remove student allocation
+  Given the student "Fernanda" is assigned to teaching assistant "Lucas"
+  And I am on the "Monitor Allocation" page
+  When I remove the allocation of student "Fernanda"
+  Then I see the confirmation message "Allocation removed successfully"
+  And I see student "Fernanda" with status "Unallocated" in the list
 
